@@ -1,6 +1,6 @@
 ### Requirements:
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
-- [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/) or RU (https://aml.name/files/file/2263-devious-interests-rus/)
+- [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/) or [RUS Version](https://aml.name/files/file/2263-devious-interests-rus/)
 - [Devious Devices NG](https://www.loverslab.com/files/file/29779-devious-devices-ng/)
 - [Kris's Papyrus Extender](https://www.nexusmods.com/skyrimspecialedition/mods/115164)
 - [Sexlab](https://github.com/eeveelo/SexLab)

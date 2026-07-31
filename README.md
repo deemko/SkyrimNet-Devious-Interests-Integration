@@ -1,13 +1,10 @@
-# SkyrimNet_Devious-Interests-Integration
-SkyrimNet support for Devious Interests
-
 ### Requirements:
+- [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
 - [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/)
 - [Devious Devices NG](https://www.loverslab.com/files/file/29779-devious-devices-ng/)
 - [Kris's Papyrus Extender](https://www.nexusmods.com/skyrimspecialedition/mods/115164)
 - [Sexlab](https://github.com/eeveelo/SexLab)
 - [SLO Aroused NG](https://www.nexusmods.com/skyrimspecialedition/mods/151502)
-
 
 ###Optional
 - [Devious Mimic Clothing](https://www.loverslab.com/files/file/14694-devious-mimic-clothing-se/)

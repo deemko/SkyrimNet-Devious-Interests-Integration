@@ -6,7 +6,7 @@
 - [Sexlab](https://github.com/eeveelo/SexLab)
 - [SLO Aroused NG](https://www.nexusmods.com/skyrimspecialedition/mods/151502)
 
-###Optional
+### Optional
 - [Devious Mimic Clothing](https://www.loverslab.com/files/file/14694-devious-mimic-clothing-se/)
 - [Devious Wicked Devices](https://www.loverslab.com/files/file/42152-devious-wicked-devices/)
 - [Laura's Bondage Shop](https://www.loverslab.com/files/file/6949-devious-devices-lauras-bondage-shop-16-aug-2025-v355-le-se/)

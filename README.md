@@ -1,3 +1,8 @@
+# SkyrimNet Devious Interests Integration
+
+# What it does
+This is...
+
 ### Requirements:
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
 - [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/) or [Devious Interests RUS](https://aml.name/files/file/2263-devious-interests-rus/)

@@ -1,4 +1,4 @@
-# SkyrimNet Devious Interests Integration
+* SkyrimNet Devious Interests Integration *
 
 # What it does
 This is...

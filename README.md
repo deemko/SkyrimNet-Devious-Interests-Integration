@@ -8,7 +8,7 @@ This is...
 - [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/) or [Devious Interests RUS](https://aml.name/files/file/2263-devious-interests-rus/)
 - [Devious Devices NG](https://www.loverslab.com/files/file/29779-devious-devices-ng/)
 - [Kris's Papyrus Extender](https://www.nexusmods.com/skyrimspecialedition/mods/115164)
-- [Sexlab](https://github.com/eeveelo/SexLab)
+- [SexLab](https://github.com/eeveelo/SexLab)
 - [SLO Aroused NG](https://www.nexusmods.com/skyrimspecialedition/mods/151502)
 
 ### Optional:

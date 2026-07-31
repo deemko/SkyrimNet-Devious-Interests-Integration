@@ -1,7 +1,8 @@
 # SkyrimNet Devious Interests Integration
+Simple SkyrimNet - Devious Interests bridge
 
 ## What it does
-This is...
+...
 
 ### Requirements:
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)

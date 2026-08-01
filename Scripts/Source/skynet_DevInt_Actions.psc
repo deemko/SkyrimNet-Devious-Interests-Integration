@@ -19,16 +19,7 @@ ScriptName skynet_DevInt_Actions
 ; ---- helpers -----------------------------------------------------------
 
 din_Main Function GetDinMain() global
-    ; Prefer EditorID lookup - more robust across Devious Interests versions than a
-    ; hardcoded FormID, since EditorIDs rarely change even when a mod's FormIDs shift
-    ; between releases (e.g. after adding/removing earlier records in the same plugin).
-    din_Main dinMn = Quest.GetQuest("din_Main") as din_Main
-    If dinMn == None
-        ; Fallback to the original FormID-based lookup, in case GetQuest-by-editorID
-        ; is unavailable or the quest was renamed - kept as a safety net, not primary.
-        dinMn = Game.GetFormFromFile(3426, "DeviousInterests.esp") as din_Main
-    EndIf
-    Return dinMn
+    Return Game.GetFormFromFile(3426, "DeviousInterests.esp") as din_Main
 EndFunction
 
 Function SendDevIntEvent(String content, Actor source) global
@@ -59,9 +50,6 @@ EndFunction
 
 Function ExtCmdDinHelpRemoveRestraint(Actor akOriginator, String contextJson, String paramsJson) Global
     din_Main dinMn = GetDinMain()
-    If dinMn == None
-        Return
-    EndIf
     Actor target = Game.GetPlayer()
     Bool wasBound = target.WornHasKeyword(dinMn.libs.zad_Lockable)
     dinMn.HelpRemoveRestraint(akOriginator)

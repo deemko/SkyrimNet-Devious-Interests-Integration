@@ -1,7 +1,7 @@
 # SkyrimNet Devious Interests Integration
 Simple SkyrimNet - Devious Interests bridge
 
-## 📖 What it does
+### 📖 What it does
 This mod acts as a "bridge" between **SkyrimNet** and **Devious Interests**, allowing the SkyrimNet ecosystem to fully recognize and utilize Devious Interests mechanics. 
 
 If you use both mods, this integration will make your experience smoother, more logical, and highly interactive.

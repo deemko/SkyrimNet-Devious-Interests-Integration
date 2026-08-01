@@ -1,8 +1,30 @@
 # SkyrimNet Devious Interests Integration
 Simple SkyrimNet - Devious Interests bridge
 
-## What it does
-...
+## 📖 What it does
+This mod acts as a "bridge" between **SkyrimNet** and **Devious Interests**, allowing the SkyrimNet ecosystem to fully recognize and utilize Devious Interests mechanics. 
+
+If you use both mods, this integration will make your experience smoother, more logical, and highly interactive.
+
+### ✨ Key Features
+The mod registers a variety of new actions in SkyrimNet related to devices and roleplay interactions:
+* **Device Removal & Unlocking:** Supports over 15 types of gear, including collars, belts, bras, cuffs, yokes, binders, mittens, hoods, gags, blindfolds, boots, corsets, plugs, harnesses, and more.
+* **Bondage Offer:** Adds support for actions related to bondage proposals.
+* **Prostitution Actions:** Integrates actions related to prostitution mechanics from DI.
+
+### 🛡️ Why It’s Safe & Convenient
+We paid special attention to stability and logical flow to ensure the mod doesn't interfere with your gameplay:
+* **Smart Logic:** The mod won't try to remove a device if you aren't wearing one, and it won't execute actions if they are invalid in the current situation.
+* **Combat Safety:** Actions are automatically blocked during combat to prevent bugs and crashes.
+* **Error Prevention:** Before executing any action, the mod thoroughly checks if the main Devious Interests script (`din_Main`) is properly loaded.
+* **Responsiveness:** Successful and unsuccessful scenarios are handled separately, preventing the SkyrimNet interface from "hanging" or desyncing.
+
+### ⚙️ Requirements & Compatibility
+* **Required Mods:** [SkyrimNet] and [Devious Interests].
+* **Installation:** The mod is packaged in a user-friendly **FOMOD installer**. Simply select your preferred options during installation.
+
+### ⚠️ Important Compatibility Note
+To function correctly, this mod uses internal identifiers (FormIDs) of items from *Devious Interests*. While this is a standard modding practice, please note: if future major updates to DI change these internal item IDs, a minor update to this integration mod may be required. It is highly recommended to keep both mods up to date.
 
 ### Requirements:
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)

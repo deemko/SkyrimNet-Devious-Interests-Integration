@@ -1,0 +1,36 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+.vs/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+*~
+
+# Logs
+*.log
+
+# Release archives
+*.zip
+*.7z
+*.rar
+
+# Build artifacts
+build/
+dist/
+release/
+out/
+
+# xEdit
+SSEEdit Backups/
+SSEEdit Cache/
+Edit Scripts/Cache/

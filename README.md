@@ -37,5 +37,5 @@ We paid special attention to stability and logical flow to ensure the mod doesn'
 - [Simple Slavery Plus Plus](https://www.loverslab.com/files/file/13531-simple-slavery-plus-plus/)
 - [Alternate Start - Live A Deviant Life](https://www.loverslab.com/files/file/20286-alternate-start-live-a-deviant-life-lich-edition/)
 
-- ## ⚠️ Important Compatibility Note
+- # ⚠️ Important Compatibility Note
 To function correctly, this mod uses internal identifiers (FormIDs) of items from *Devious Interests*. While this is a standard modding practice, please note: if future major updates to DI change these internal item IDs, a minor update to this integration mod may be required. It is highly recommended to keep both mods up to date.

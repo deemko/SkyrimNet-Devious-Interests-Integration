@@ -1,0 +1,29 @@
+# Auto-detect text files and normalize line endings
+* text=auto
+
+# Source files
+*.psc text eol=lf
+*.txt text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.xml text eol=lf
+
+# Plugin and compiled files
+*.esp binary
+*.esm binary
+*.esl binary
+*.pex binary
+*.bsa binary
+*.dds binary
+*.nif binary
+*.hkx binary
+*.wav binary
+*.xwm binary
+*.fuz binary
+*.seq binary
+
+# Archives
+*.zip binary
+*.7z binary
+*.rar binary

@@ -19,13 +19,6 @@ We paid special attention to stability and logical flow to ensure the mod doesn'
 * **Error Prevention:** Before executing any action, the mod thoroughly checks if the main Devious Interests script (`din_Main`) is properly loaded.
 * **Responsiveness:** Successful and unsuccessful scenarios are handled separately, preventing the SkyrimNet interface from "hanging" or desyncing.
 
-### ⚙️ Requirements & Compatibility
-* **Required Mods:** [SkyrimNet] and [Devious Interests].
-* **Installation:** The mod is packaged in a user-friendly **FOMOD installer**. Simply select your preferred options during installation.
-
-### ⚠️ Important Compatibility Note
-To function correctly, this mod uses internal identifiers (FormIDs) of items from *Devious Interests*. While this is a standard modding practice, please note: if future major updates to DI change these internal item IDs, a minor update to this integration mod may be required. It is highly recommended to keep both mods up to date.
-
 ### Requirements:
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
 - [Devious Interests](https://www.loverslab.com/files/file/41305-devious-interests-se/) or [Devious Interests RUS](https://aml.name/files/file/2263-devious-interests-rus/)
@@ -43,3 +36,6 @@ To function correctly, this mod uses internal identifiers (FormIDs) of items fro
 - [SexLab Inflation Framework](https://www.loverslab.com/files/file/6938-sexlab-inflation-framework-se/)
 - [Simple Slavery Plus Plus](https://www.loverslab.com/files/file/13531-simple-slavery-plus-plus/)
 - [Alternate Start - Live A Deviant Life](https://www.loverslab.com/files/file/20286-alternate-start-live-a-deviant-life-lich-edition/)
+
+- ## ⚠️ Important Compatibility Note
+To function correctly, this mod uses internal identifiers (FormIDs) of items from *Devious Interests*. While this is a standard modding practice, please note: if future major updates to DI change these internal item IDs, a minor update to this integration mod may be required. It is highly recommended to keep both mods up to date.

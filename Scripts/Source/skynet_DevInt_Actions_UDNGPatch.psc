@@ -31,6 +31,12 @@ din_Main Function GetDinMain() global
     Return dinMn
 EndFunction
 
+; UDNG compatibility check (see RegisterDevIntActions). 2048 = SkyrimNetUDNG.esp's own
+; internal Quest FormID (0x800) - purely passive detection, does not touch UDNG at all.
+Bool Function _IsUDNGInstalled() global
+    Return Game.GetFormFromFile(2048, "SkyrimNetUDNG.esp") != None
+EndFunction
+
 Function SendDevIntEvent(String content, Actor source) global
     If source != None
         source.SendModEvent("SkyrimNetDevInt_Event", content, 0.0)
@@ -381,25 +387,35 @@ EndFunction
 ; ---- Registration (called once on game load, see skyrimnet_devint_PlayerAlias) --
 
 Function RegisterDevIntActions() Global
-    ; generic fallback
-    skyrimnetapi.RegisterAction("DevInt_HelpRemoveRestraint", "Removes whatever Devious Devices restraint the player is currently wearing, if any is unlockable without a key.", "skynet_DevInt_Actions", "ExtCmdDinHelpRemoveRestraint_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinHelpRemoveRestraint", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+    ; --- UDNG compatibility ---
+    ; SkyrimNet_UDNG already covers "remove a Devious Devices item from the player"
+    ; with its own ExtCmdUnequipX actions. If UDNG is installed, we skip registering
+    ; our own overlapping unlock actions entirely so the LLM only ever sees ONE way
+    ; to remove a given device (UDNG's), instead of two competing near-duplicate
+    ; actions with different underlying mechanics (UDNG: free removal; DevInterests:
+    ; BlacksmithUnlock, which can involve a gold cost). BondageOffer/Prostitution do
+    ; not overlap with anything UDNG does, so those always register regardless.
+    If !_IsUDNGInstalled()
+        ; generic fallback
+        skyrimnetapi.RegisterAction("DevInt_HelpRemoveRestraint", "Removes whatever Devious Devices restraint the player is currently wearing, if any is unlockable without a key.", "skynet_DevInt_Actions", "ExtCmdDinHelpRemoveRestraint_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinHelpRemoveRestraint", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
 
-    ; 15 category-specific unlocks
-    skyrimnetapi.RegisterAction("DevInt_UnlockCollar", "Unlocks and removes a Devious Devices collar from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockCollar_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockCollar", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockBelt", "Unlocks and removes a Devious Devices chastity belt from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBelt_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBelt", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockBlindfold", "Unlocks and removes a Devious Devices blindfold from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBlindfold_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBlindfold", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockBoots", "Unlocks and removes Devious Devices pony boots from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBoots_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBoots", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockBra", "Unlocks and removes a Devious Devices chastity bra from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBra_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBra", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockClitPierc", "Unlocks and removes a Devious Devices clit piercing from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockClitPierc_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockClitPierc", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockCorset", "Unlocks and removes a Devious Devices corset from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockCorset_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockCorset", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockGag", "Unlocks and removes a Devious Devices gag from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockGag_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockGag", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockGloves", "Unlocks and removes Devious Devices mitten gloves from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockGloves_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockGloves", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockHarness", "Unlocks and removes a Devious Devices body harness from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHarness_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHarness", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockHeavyBondage", "Unlocks and removes a Devious Devices heavy bondage rig from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHeavyBondage_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHeavyBondage", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockHobbleDress", "Unlocks and removes a Devious Devices hobble dress from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHobbleDress_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHobbleDress", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockLegCuffs", "Unlocks and removes Devious Devices leg cuffs from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockLegCuffs_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockLegCuffs", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockArmCuffs", "Unlocks and removes Devious Devices arm cuffs from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockArmCuffs_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockArmCuffs", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
-    skyrimnetapi.RegisterAction("DevInt_UnlockNipPierc", "Unlocks and removes a Devious Devices nipple piercing from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockNipPierc_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockNipPierc", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        ; 15 category-specific unlocks
+        skyrimnetapi.RegisterAction("DevInt_UnlockCollar", "Unlocks and removes a Devious Devices collar from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockCollar_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockCollar", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockBelt", "Unlocks and removes a Devious Devices chastity belt from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBelt_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBelt", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockBlindfold", "Unlocks and removes a Devious Devices blindfold from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBlindfold_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBlindfold", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockBoots", "Unlocks and removes Devious Devices pony boots from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBoots_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBoots", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockBra", "Unlocks and removes a Devious Devices chastity bra from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockBra_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockBra", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockClitPierc", "Unlocks and removes a Devious Devices clit piercing from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockClitPierc_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockClitPierc", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockCorset", "Unlocks and removes a Devious Devices corset from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockCorset_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockCorset", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockGag", "Unlocks and removes a Devious Devices gag from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockGag_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockGag", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockGloves", "Unlocks and removes Devious Devices mitten gloves from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockGloves_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockGloves", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockHarness", "Unlocks and removes a Devious Devices body harness from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHarness_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHarness", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockHeavyBondage", "Unlocks and removes a Devious Devices heavy bondage rig from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHeavyBondage_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHeavyBondage", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockHobbleDress", "Unlocks and removes a Devious Devices hobble dress from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockHobbleDress_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockHobbleDress", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockLegCuffs", "Unlocks and removes Devious Devices leg cuffs from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockLegCuffs_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockLegCuffs", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockArmCuffs", "Unlocks and removes Devious Devices arm cuffs from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockArmCuffs_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockArmCuffs", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+        skyrimnetapi.RegisterAction("DevInt_UnlockNipPierc", "Unlocks and removes a Devious Devices nipple piercing from the player.", "skynet_DevInt_Actions", "ExtCmdDinUnlockNipPierc_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinUnlockNipPierc", "", "PAPYRUS_NESTED_ACTION", 1, "{}", "DEVINT_UNLOCK", "")
+    EndIf
 
     ; bondage offer / prostitution
     skyrimnetapi.RegisterAction("DevInt_BondageOffer", "The speaker physically restrains the player with Devious Devices. Parameter 'severity' must be one of: light, medium, heavy, sex.", "skynet_DevInt_Actions", "ExtCmdDinBondageOffer_IsEligible", "skynet_DevInt_Actions", "ExtCmdDinBondageOffer", "", "PAPYRUS_NESTED_ACTION", 1, "{\"severity\": \"String\"}", "DEVINT_BONDAGE", "")
